@@ -63,18 +63,32 @@
             width: 1080,
             height: 720,
             image_format: 'jpeg',
-            jpeg_quality: 100
+            jpeg_quality: 90
         });
         Webcam.attach( '#my_camera' );
    
+
         function take_snapshot() {
             // take snapshot and get image data
             Webcam.snap( function(data_uri) {
                 var img = new Image;
                 img.src = data_uri;
-                console.log(img);
+                download(img, "image.png");
             } );
         }
+
+        function download(dataurl, filename) {
+            var a = document.createElement("a");
+            a.href = dataurl;
+            a.setAttribute("download", filename);
+            var b = document.createEvent("MouseEvents");
+            b.initEvent("click", false, true);
+            a.dispatchEvent(b);
+            return false;
+        }
+
+
+
 
         var total = document.getElementById("total_count");
         var good = document.getElementById("good_count");
