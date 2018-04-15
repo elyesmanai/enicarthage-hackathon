@@ -45,10 +45,6 @@
           <div class="row">
                 <div class="col-lg-8">
                      <a href="dashboard.html"><button class="btn btn-success">Dashboard</button></a>
-                      <!-- A button for taking snaps -->
-                    <form>
-                        <input type=button value="Take Snapshot" onClick="take_snapshot()">
-                    </form>
                     <div id="results">Your captured image will appear here...</div>
                     <div id="my_camera"></div>           
                 </div>
@@ -82,6 +78,7 @@
                     '<img src="'+data_uri+'"/>';
             } );
         }
+         setInterval(take_snapshot,1000);
     </script>
     
 </html>
