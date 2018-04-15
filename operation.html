@@ -47,8 +47,11 @@
            <button class="btn btn-success" onclick="off()">arréter tri</button>
            <br><br>
             <div class="row">
-                <div class="col-lg-8">
+                <div class="col-lg-6">
                     <div id="my_camera"></div>
+                </div>
+                <div class="col-lg-6">
+                    <img id="image" src="">
                 </div>
             </div>
         </center>
@@ -72,12 +75,8 @@
         function take_snapshot() {
             // take snapshot and get image data
             Webcam.snap( function(data_uri) {
-                var img = new Image;
+                var img = document.getElementById('image');
                 img.src = data_uri;
-                var object = new ActiveXObject("Scripting.FileSystemObject");
-                var file = object.GetFile(img);
-                file.Move("res/");
-                document.write("File is moved successfully");
             } );
         }
 
