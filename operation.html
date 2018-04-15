@@ -35,19 +35,11 @@
                    <h1 id="total_count">0</h1>
                </div>
                <div class="col-lg-4">
-<<<<<<< HEAD
                    <h2>Bon état</h2>
                    <h1 id="good_count">0</h1>
                </div>
                <div class="col-lg-4">
                    <h2>pourri</h2>
-=======
-                   <h2>Salima</h2>
-                   <h1 id="good_count">0</h1>
-               </div>
-               <div class="col-lg-4">
-                   <h2>Khemja</h2>
->>>>>>> f1cf8d1f8b8a475544cbf5027f407a013415b9d2
                    <h1 id="bad_count">0</h1>
                </div>
            </div>
@@ -61,13 +53,9 @@
                 </div>
             </div>
             <div class="row">
-<<<<<<< HEAD
                <div class="col-lg-10">
               <div id="my_image"></div>
                 </div>
-=======
-            
->>>>>>> f1cf8d1f8b8a475544cbf5027f407a013415b9d2
             </div>
         </center>
        </div>
@@ -81,21 +69,16 @@
             width: 1080,
             height: 720,
             image_format: 'jpeg',
-            jpeg_quality: 100
+            jpeg_quality: 90
         });
         Webcam.attach( '#my_camera' );
    
-<<<<<<< HEAD
   
   
-=======
-
->>>>>>> f1cf8d1f8b8a475544cbf5027f407a013415b9d2
      
         function take_snapshot() {
             // take snapshot and get image data
             Webcam.snap( function(data_uri) {
-<<<<<<< HEAD
              document.getElementById('my_image').innerHTML = '<img src="'+data_uri+'"/>';
             var img = new Image();
          img.src=data_uri;
@@ -130,15 +113,6 @@
          }
 
         console.log("40");
-=======
-               var img_url = encodeURI(data_uri);
-               $.post("localhost:5000/predictions",{ url:img_url });
-               console.log("50");
-            });
-         }
-
-        console.log("43");
->>>>>>> f1cf8d1f8b8a475544cbf5027f407a013415b9d2
         var total = document.getElementById("total_count");
         var good = document.getElementById("good_count");
         var bad = document.getElementById("bad_count");
@@ -172,9 +146,4 @@
         }
     </script>
     
-<<<<<<< HEAD
 </html>
-=======
-    
-</html>
->>>>>>> f1cf8d1f8b8a475544cbf5027f407a013415b9d2
