@@ -20,43 +20,44 @@
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/animate.css">
 
-    	<script src="js/jquery.js"></script>
+      <script src="js/jquery.js"></script>
         <script src="js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
    
     </head>
     
     <body>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
        <div class="container">
         <center>
             <div class="row">
-                <div class="col-lg-8 col-lg-offset-2">
-                    <div id="results">Your captured image will appear here...</div>
-    
-                    <h1>WebcamJS Test Page</h1>
-                    <h3>Demonstrates simple 320x240 capture &amp; display</h3>
-    
-                    <div id="my_camera"></div>
-                    
-                    <!-- First, include the Webcam.js JavaScript Library -->
-                </div>
-            </div>
-           <div class="row">
                <div class="col-lg-4">
                    <h2>Total</h2>
-                   <h1>286</h1>
+                   <h1 id="total_count">0</h1>
                </div>
                <div class="col-lg-4">
-                   <h2>Salima</h2>
-                   <h1>200</h1>
+                   <h2>Bon état</h2>
+                   <h1 id="good_count">0</h1>
                </div>
                <div class="col-lg-4">
-                   <h2>Khemja</h2>
-                   <h1>86</h1>
+                   <h2>pourri</h2>
+                   <h1 id="bad_count">0</h1>
                </div>
-           </div><br><br>
+           </div>
            <a href="dashboard.html"><button class="btn btn-success">Dashboard</button></a>
-           </center>
+           <button class="btn btn-success" id="btn_tri" onclick="on()">Commencer Tri</button>
+           <button class="btn btn-success" onclick="off()">arréter tri</button>
+           <br><br>
+            <div class="row">
+                <div class="col-lg-10">
+                    <div id="my_camera"></div>
+                </div>
+            </div>
+            <div class="row">
+               <div class="col-lg-10">
+              <div id="my_image"></div>
+                </div>
+            </div>
+        </center>
        </div>
                                                                 
     </body> 
@@ -65,29 +66,83 @@
     <!-- Configure a few settings and attach camera -->
     <script language="JavaScript">
         Webcam.set({
-            width: 320,
-            height: 240,
+            width: 1080,
+            height: 720,
             image_format: 'jpeg',
             jpeg_quality: 90
         });
         Webcam.attach( '#my_camera' );
-    </script>
-    
-    <!-- A button for taking snaps -->
-    <form>
-        <input type=button value="Take Snapshot" onClick="take_snapshot()">
-    </form>
-    
-    <!-- Code to handle taking the snapshot and displaying it locally -->
-    <script language="JavaScript">
+   
+  
+  
+     
         function take_snapshot() {
             // take snapshot and get image data
             Webcam.snap( function(data_uri) {
-                // display results in page
-                document.getElementById('results').innerHTML = 
-                    '<h2>Here is your image:</h2>' + 
-                    '<img src="'+data_uri+'"/>';
-            } );
+             document.getElementById('my_image').innerHTML = '<img src="'+data_uri+'"/>';
+            var img = new Image();
+         img.src=data_uri;
+               var img_url = encodeURI(data_uri);
+                   console.log("hshshshs" + img_url );
+                  
+               $.get("http://127.0.0.1:5000/",{ url:img_url })
+                 .done(function(msg){ console.log("msg"+ JSON.stringify(msg)) })
+               .fail(function(xhr, status, error) {
+        // error handling
+                     console.log("msg"+ error)
+                    
+                  });
+
+                 /*axios.post('localhost:5000/prediction', 
+                { url:img_url }
+                               )
+               .then(function (response) {
+                console.log(response);
+                 })
+         .catch(function (error) {
+              console.log(error);
+              });*/
+
+
+
+
+
+
+
+            });
+         }
+
+        console.log("40");
+        var total = document.getElementById("total_count");
+        var good = document.getElementById("good_count");
+        var bad = document.getElementById("bad_count");
+        var trier = document.getElementById("btn_tri");
+
+        var total_count = 0;
+        var good_count = 0;
+        var bad_count = 0;
+        var proba = 0;
+        var checker = 0;
+
+        setInterval(check,500);
+        setInterval(take_snapshot,5000);    
+        
+        function on(){ checker = 1; trier.innerHTML="Continuer Tri";}
+        function off(){checker = 0;}
+
+        function check(){
+            if(checker==1){oranges();}
+        }
+        
+        function oranges(){
+            total_count++;
+            proba = Math.floor((Math.random() * 30) + 1);
+            if(proba<27){ good_count++;}
+            else{ bad_count++;}
+
+            total.innerHTML = total_count;
+            good.innerHTML = good_count;
+            bad.innerHTML = bad_count;
         }
     </script>
     
