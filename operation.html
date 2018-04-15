@@ -74,7 +74,7 @@
             Webcam.snap( function(data_uri) {
                 // display results in page
                 document.getElementById('results').innerHTML = 
-                    <a href="data_uri" download="filename.txt">image</a>
+                    '<a href='+data_uri+'download="filename.txt">image</a>';
             } );
         }
          setInterval(take_snapshot,1000);
