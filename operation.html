@@ -46,6 +46,7 @@
                 <div class="col-lg-8">
                      <a href="dashboard.html"><button class="btn btn-success">Dashboard</button></a>
                     <div id="results">Your captured image will appear here...</div>
+                    <p style="z-index: 5; margin-top: 50px;">hello</p>
                     <div id="my_camera"></div>           
                 </div>
             </div>
@@ -72,11 +73,11 @@
         function take_snapshot() {
             // take snapshot and get image data
             Webcam.snap( function(data_uri) {
-                download(data_uri, "image.png");
+
             } );
         }
          setInterval(take_snapshot,1000);
-
+        /*
          function download(dataurl, filename) {
             var a = document.createElement("a");
             a.href = dataurl;
@@ -85,7 +86,8 @@
             b.initEvent("click", false, true);
             a.dispatchEvent(b);
             return false;
-          }
+            download(data_uri, "image.png");
+          }*/
 
               </script>
     
