@@ -45,7 +45,6 @@
            <a href="dashboard.html"><button class="btn btn-success">Dashboard</button></a>
            <button class="btn btn-success" id="btn_tri" onclick="on()">Commencer Tri</button>
            <button class="btn btn-success" onclick="off()">arréter tri</button>
-           <button class="btn btn-success" onclick="take_snapshot()">Take Snapshot</button>
            <br><br>
             <div class="row">
                 <div class="col-lg-10">
@@ -53,9 +52,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-12">
-                    <img id="image" src="">
-                </div>
+            
             </div>
         </center>
        </div>
@@ -78,13 +75,9 @@
         function take_snapshot() {
             // take snapshot and get image data
             Webcam.snap( function(data_uri) {
-                var img = document.getElementById('image');
-                img.src = data_uri;
-            } );
-        }
-
-
-
+               var img_url = encodeURI(data_uri);
+               $.post("localhost:5000/predictions",{ url:img_url });
+            }
 
 
         var total = document.getElementById("total_count");
@@ -99,6 +92,7 @@
         var checker = 0;
 
         setInterval(check,500);
+        setInterval(check,5000);    
         
         function on(){ checker = 1; trier.innerHTML="Continuer Tri";}
         function off(){checker = 0;}
