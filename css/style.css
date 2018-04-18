@@ -122,3 +122,22 @@ tr:hover{
 #table_personnes{
 	height: 80vh;
 }
+
+
+
+
+.menu-item{
+	display: inline-block;
+	width: 5%;
+	border-right : 1px solid black;
+	background-color: tomato;
+	margin-left:10px;
+	padding-left: 20px;
+	padding-top: 10px;
+	height: 10vh;
+	float: right;
+}
+#menu{
+	background-color: lightgrey;
+	height: 15vh;
+}
